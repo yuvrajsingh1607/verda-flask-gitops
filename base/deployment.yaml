@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: verda-flask
-  namespace: verda-flask
   labels:
     app: verda-flask
 spec:
@@ -15,6 +14,8 @@ spec:
       labels:
         app: verda-flask
     spec:
+      imagePullSecrets:
+        - name: harbor-creds
       containers:
         - name: verda-flask
           image: harbor.95.133.253.118.sslip.io/verda-harbor/verda-flask:v1
