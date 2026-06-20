@@ -19,17 +19,18 @@ spec:
       containers:
         - name: verda-flask
           image: harbor.95.133.253.118.sslip.io/verda-harbor/verda-flask:v1
+          command: ["python", "-c", "from app import app; app.run(host='0.0.0.0', port=5000)"]
           ports:
             - containerPort: 5000
           readinessProbe:
             httpGet:
-              path: /healthz
+              path: /health
               port: 5000
             initialDelaySeconds: 3
             periodSeconds: 10
           livenessProbe:
             httpGet:
-              path: /healthz
+              path: /health
               port: 5000
             initialDelaySeconds: 5
             periodSeconds: 20
